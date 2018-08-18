@@ -1,0 +1,86 @@
+<ion-modal-view ng-controller="GuestListCtrl">
+    <ion-header-bar>
+        <h1 class="title">
+            <i class="icon fa fa-check-circle"></i> Tally form</h1>
+        <button ng-click="checkInTally.hide()" class="button button-clear button-positive">Close</button>
+    </ion-header-bar>
+
+    <ion-content>
+
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Guest first name</span>
+                <input type="text" ng-model="rsvp.first_name">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Guest last name</span>
+                <input type="text" ng-model="rsvp.last_name">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Guest Email</span>
+                <input type="email" ng-model="rsvp.email">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Guest Phone number</span>
+                <input type="text" ng-model="rsvp.phone" mask="(999) 999-9999" clean="true">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Max guests per RSVP</span>
+                <input type="text" ng-model="event.max_rsvp" disabled>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Total guests</span>
+                <input type="number" ng-value="rsvp.guests" ng-init="rsvp.guests = 0" disabled>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col-80 col-offset-10">
+                <div class="item text-center" style="background-color: rgb(216, 137, 150);">
+                    <i class="icon ion-woman padding-left" style="font-size: 5em; color: white;"></i>
+                    <button class="button button-right" style="font-size: 2em; font-weight: bold;">
+                        {{ rsvp.female }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-80 col-offset-10">
+                <div class="item range">
+                    <i class="icon ion-minus-circled" ng-click="guestMinus('female')"></i>
+                    <input type="range" ng-model="rsvp.female" min="0" ng-value="rsvp.female" max="{{ event.max_rsvp }}" ng-change="updateGuests()" ng-init="rsvp.female = 0">
+                    <i class="icon ion-plus-circled" ng-click="guestPlus('female')"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-80 col-offset-10">
+                <div class="item text-center" style="background-color: rgb(70, 113, 153);">
+                    <i class="icon ion-man padding-left" style="font-size: 5em; color: white;"></i>
+                    <button class="button button-right" style="font-size: 2em; font-weight: bold;">
+                        {{ rsvp.male }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" style="margin-bottom: 40px;">
+            <div class="col-80 col-offset-10">
+                <div class="item range">
+                    <i class="icon ion-minus-circled" ng-click="guestMinus('male')"></i>
+                    <input type="range" ng-model="rsvp.male" min="0" ng-value="rsvp.male" max="{{ event.max_rsvp }}" ng-change="updateGuests()" ng-init="rsvp.male = 0">
+                    <i class="icon ion-plus-circled" ng-click="guestPlus('male')"></i>
+                </div>
+            </div>
+        </div>
+        
+        <button class="button button-full button-positive" ng-click="sendTallyForm()" ng-disabled="rsvp.guests
+                > event.max_rsvp || rsvp.guests <= 0">
+            <i class="icon fa fa-check-circle"></i> Confirm
+        </button>
+
+    </ion-content>
+
+</ion-modal-view>

@@ -1,0 +1,48 @@
+<ion-modal-view ng-controller="GuestListCtrl">
+    <ion-header-bar>
+        <h1 class="title"><i class="icon fa fa-check-circle"></i> Check-in list</h1>
+        <button ng-click="checkIn.hide()" class="button button-clear button-positive">Close</button>
+    </ion-header-bar>
+    
+    <label class="item item-input" style="margin-top: 45px;">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search rsvp by name or phone number" ng-model="search" ng-change="findBy(search)">
+    </label>
+    
+    <div class="list card" ng-hide="event.rsvp.length" style="margin-top: 40px;">
+        <a class="item item-icon-left assertive">
+            <i class="icon ion-alert-circled"></i> There are no check-in yet
+        </a>
+    </div>
+
+    <ion-content>
+        
+        <ion-refresher on-refresh="doRefreshEvent()"></ion-refresher>
+
+        <ul class="list" ng-show="!search.length" style="margin-top: 50px;">
+            <li class="item item-button-right" ng-repeat="rsvp in event.rsvp" ng-show="rsvp.checkin">
+                <h2>{{ rsvp.first_name+' '+rsvp.last_name | ucwords }}</h2>
+                <p>{{ rsvp.phone | phone }}</p>
+                <a class="button button-light" style="font-size: 0.9em;">
+                    <i class="icon fa fa-check-circle balanced"></i>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="list" ng-show="search.length" style="margin-top: 50px;">
+            <li class="item item-button-right" ng-repeat="rsvp in searchResults" ng-show="rsvp.checkin">
+                <h2>{{ rsvp.first_name+' '+rsvp.last_name | ucwords }}</h2>
+                <p>{{ rsvp.phone | phone }}</p>
+                <a class="button button-light" style="font-size: 0.9em;">
+                    <i class="icon fa fa-check-circle balanced"></i>
+                </a>
+            </li>
+        </ul>
+
+    </ion-content>
+
+    <button class="button button-float button-positive" ng-click="openCheckInTally()">
+        <i class="icon fa fa-user-plus"></i>
+    </button>
+
+</ion-modal-view>

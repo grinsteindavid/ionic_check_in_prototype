@@ -1,0 +1,121 @@
+
+<ion-view view-title="Atnight - Event information">
+
+  <ion-content>
+
+    <ion-refresher on-refresh="doRefreshEvent()"></ion-refresher>
+
+    <div class="list" style="margin-bottom: 4em;">      
+      <div class="item item-body text-center">
+        <img class="full-image" src="{{ event.flyer }}">
+        <h2 style="text-align: center;">{{ event.title | ucwords }}</h2>
+        <p>
+          <span class="subdued">{{ event.date | date}} ~ </span>
+          <span class="subdued">{{ event.start_time | ampm }} / {{ event.end_time | ampm }}</span>
+        </p>
+        <p>
+          <canvas id="doughnut" class="chart chart-doughnut" chart-data="dataChart" chart-labels="labelsChart" chart-options="{legend: {display: true}}">
+          </canvas>
+        </p>
+      </div>
+        
+        <li class="item item-toggle">
+          Allow RSVP?
+          <label class="toggle toggle-positive">
+            <input type="checkbox" ng-checked="event.rsvp_status" disabled>
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+        <li class="item item-toggle">
+          RSVP reminder?
+          <label class="toggle toggle-positive">
+            <input type="checkbox" ng-checked="event.rsvp_reminder" disabled>
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Max guests per RSVP</span>
+          <input type="number" ng-model="event.max_rsvp" disabled>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">RSVP Email</span>
+          <input type="text" ng-model="event.rsvp_email" disabled>
+        </label>
+    </div>
+
+    <!-- <div class="list" ng-hide="search.length">
+      <ion-list>
+        <div ng-repeat="rsvp in event.rsvp">
+          <ion-item style="font-size: 1em;" class="item-stable"
+                    ng-click="toggleGroup(rsvp)"
+                    ng-class="{active: isGroupShown(rsvp)}">
+            <i class="icon" ng-class="isGroupShown(rsvp) ? 'ion-arrow-up-c' : 'ion-arrow-down-c'"></i>
+            &nbsp;
+            <strong>{{rsvp.phone | phone}}</strong> ~  <small> {{ rsvp.rsvp_on | dateHour }} </small>            
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-show="isGroupShown(rsvp)">
+            <p style="font-size: 1.2em" ng-if="event.campaign.gender">
+              Gender: <i ng-class="rsvp.gender == 'male' ? 'ion-man positive' : 'ion-woman violet'"></i>
+            </p>
+            <p style="font-size: 1.2em" ng-if="event.campaign.rating">Rating: <i class="icon ion-star"></i> {{ rsvp.rating }}</p>
+            <p style="font-size: 1.2em" ng-if="event.campaign.charge">
+              Charge: <i class="icon ion-cash"></i>
+              <span ng-if="rsvp.charge == 1" class="balanced">Yes</span> 
+              <span ng-if="rsvp.charge == 0" class="assertive">No</span>
+            </p>
+          </ion-item>
+        </div>
+      </ion-list>
+    </div> -->
+
+    <!-- <div class="list" ng-hide="!search.length">
+      <ion-list>
+        <div ng-repeat="rsvp in searchResults">
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(rsvp)"
+                    ng-class="{active: isGroupShown(rsvp)}">
+              <i class="icon" ng-class="isGroupShown(rsvp) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            <strong>{{rsvp.phone | phone}}</strong> ~  <em> {{ rsvp.rsvp_on | date }} </em>
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-show="isGroupShown(rsvp)">
+            <p style="font-size: 1.2em" ng-if="event.campaign.gender">
+              Gender: <i ng-class="rsvp.gender == 'male' ? 'ion-man positive' : 'ion-woman violet'"></i>
+            </p>
+            <p style="font-size: 1.2em" ng-if="event.campaign.rating">
+              Rating: <i class="icon ion-star"></i> {{ rsvp.rating }}
+            </p>
+            <p style="font-size: 1.2em" ng-if="event.campaign.charge">
+              Charge: <i class="icon ion-cash"></i> 
+              <span ng-if="rsvp.charge == 1" class="balanced">Yes</span> 
+              <span ng-if="rsvp.charge == 0" class="assertive">No</span>
+            </p>
+          </ion-item>
+        </div>
+      </ion-list>
+    </div> -->
+
+  </ion-content>
+
+  <div class="tabs-icon-top tabs-background-dark">
+    <div class="tabs tabs-color-light">
+      <a class="tab-item" ng-click="guestList.show()" style="color: white; margin-top: 3px;">
+        <i class="icon fa fa-address-book"></i> Guest list
+      </a>
+      <a class="tab-item" ng-click="checkIn.show()" style="color: white; margin-top: 3px;">
+        <i class="icon fa fa-check-circle"></i> Check-in
+      </a>
+    </div>
+  </div>
+
+  <!-- <button class="button button-float button-positive" ng-click="sendInvitation(event)">
+      <i class="icon ion-email"></i>
+  </button> -->
+
+</ion-view>

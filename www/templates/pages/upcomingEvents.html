@@ -1,0 +1,61 @@
+<ion-view view-title="Atnight - Upcoming Events">
+
+  <label class="item item-input" style="margin-top: 45px;">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search events by name" ng-model="search" ng-change="findBy(search)">
+  </label>
+  
+  <div class="list card" ng-hide="events.length" style="margin-top: 40px;">
+    <a class="item item-icon-left assertive">
+      <i class="icon ion-alert-circled"></i> There are no upcoming events
+    </a>
+  </div>
+  <ion-content>
+    
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+    <!-- <div class="list" style="margin-top: 50px;" ng-hide="search.length">
+        <div class="item item-button-right" ng-repeat="event in events" menu-close>
+          <a ng-click="sendInvitation(event)">
+            <h2><strong>{{ event.title.substr(0, 20) | uppercase }}..</strong></h2>
+            <h2><em> {{ event.date | date }} </em></h2>
+          </a>
+          <a href="#/app/event/{{event.id}}" class="button button-positive" style="font-size: 0.9em;">
+             <i class="icon ion-stats-bars"></i> 
+             <span style="margin-left: 4px;">{{ event.rsvp_count }}</span>
+          </a>
+        </div>
+    </div> -->
+
+    <div class="list" style="margin-top: 50px;" ng-show="!search.length">
+      <a class="item item-thumbnail-left" href="#/app/event/{{event.id}}" ng-repeat="event in events" menu-close>
+        <img src="{{ event.flyer }}">
+        <h2>{{ event.title.substr(0, 20) | ucwords }}..</h2>
+        <p>{{ event.date | date }}</p>
+      </a>
+    </div>
+
+    <div class="list" style="margin-top: 50px;" ng-show="search.length">
+      <a class="item item-thumbnail-left" href="#/app/event/{{event.id}}" ng-repeat="event in searchResults" menu-close>
+        <img src="{{ event.flyer }}">
+        <h2>{{ event.title.substr(0, 20) | ucwords }}..</h2>
+        <p>{{ event.date | date }}</p>
+      </a>
+    </div>
+
+    <!-- <div class="list" style="margin-top: 50px;" ng-hide="!search.length">
+        <div class="item item-button-right" ng-repeat="event in searchResults" menu-close>
+          <a ng-click="sendInvitation(event)">
+            <h2><strong>{{ event.title.substr(0, 20) | uppercase }}..</strong></h2>
+            <h2><em> {{ event.date | date }} </em></h2>
+          </a>
+          <a href="#/app/event/{{event.id}}" class="button button-positive" style="font-size: 0.9em;">
+             <i class="icon ion-stats-bars"></i> 
+             <span style="margin-left: 4px;">{{ event.rsvp_count }}</span>
+          </a>
+        </div>
+    </div> -->
+
+  </ion-content>
+
+</ion-view>

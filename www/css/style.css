@@ -1,1 +1,153 @@
 /* Empty. Add your own CSS if you like */
+
+
+.login-content {
+  /* background-image: url('http://2night.net/images/admin/watermark-holder-horizontal1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; */
+  /* background-image: linear-gradient(to bottom, #f2f2f2, #f0f0f0, #eeeeee, #ececec, #eaeaea); */
+  /* background-image: linear-gradient(to left bottom, #000000, #161616, #242424, #333333, #434343); */
+ /* background-image: linear-gradient(to top, #000000, #161616, #242424, #333333, #434343); */
+ background: #FFFAFA;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+* {
+  font-family: 'Lato', sans-serif;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.11);
+}
+
+.item-complex .item-content, .item-radio .item-content {
+	padding: 0px;
+	text-align: center;
+}
+
+.non-badge {
+	top: unset !important;
+	right: unset !important;
+}
+
+list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+.violet {
+	color: violet;
+}
+ion-pane#login-2 {
+  background: #FAFAFA;
+  color: #333;
+}
+
+ion-pane#login-2 ion-content {
+  padding-top: 70px;
+  text-align: center;
+}
+
+ion-pane#login-2 p#login-header {
+  font-size: 2em;
+  font-weight: 100;
+}
+
+ion-pane#login-2 p#pin-title {
+  margin-top: 30px;
+}
+
+ion-pane#login-2 #pin {
+  position: relative;
+  width: 50%;
+  display: inline-flex;
+  margin: 0 auto;
+  line-height: 40px;
+}
+
+ion-pane#login-2 #pin > i {
+  position: absolute;
+  top: 15px;
+  font-size: 20px;
+  margin-left: 15px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+ion-pane#login-2 #pin > i {
+  position: absolute;
+  top: 0;
+  font-size: 20px;
+  margin-left: 15px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+ion-pane#login-2 #pin > i.activated {
+  color: rgb(0, 0, 0);
+}
+
+ion-pane#login-2 #pin div {
+  border-bottom: 1px solid #333;
+  height: 40px;
+  flex: 1;
+  margin: 0 5px;
+}
+
+ion-pane#login-2 #pin div i.ion-record {
+  margin: 0;
+}
+
+.vertical-align-content > *
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+     vertical-align: middle;
+}
+
+.button-float{
+  color:white !important;
+  z-index: 12 !important;
+  position: absolute !important; 
+  bottom: 10px !important;
+  right: 10px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+  -webkit-transition: 0.2s linear !important;
+  transition: 0.2s linear !important;
+  -webkit-transition-property: -webkit-transform, all !important;
+  transition-property: transform, all !important;
+}
+
+.button-float-default {
+  background: $assertive !important;
+  color:white !important;
+  z-index: 12 !important;
+  position: absolute !important; 
+  bottom: 0 !important;
+  right: 0 !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+  -webkit-transition: 0.2s linear !important;
+  transition: 0.2s linear !important;
+  -webkit-transition-property: -webkit-transform, all !important;
+  transition-property: transform, all !important;
+}
+
+.button-float:hover{
+  -webkit-transform: translate3d(0, -1px, 0)  !important;
+  transform: translate3d(0, -1px, 0) !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4) !important;
+    background: darken($assertive, 10%) !important;
+}

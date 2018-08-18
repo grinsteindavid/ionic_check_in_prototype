@@ -1,0 +1,43 @@
+
+<ion-view view-title="Atnight - Dashboard">
+
+  <ion-content>
+
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+    <div class="row">
+      <div class="col-80 col-offset-10">
+        <div class="card text-center">
+          <div class="item item-divider">
+            <i class="icon ion-bookmark"></i> RSVPs
+          </div>
+          <div class="item item-text-wrap">
+            <p><i class="fa fa-arrow-up"></i> MAX: {{ data.rsvp_max }}</p>
+            <p><i class="fa fa-percent"></i> AVERAGE: {{ data.rsvp_avg.toFixed(2) }}</p>
+            <p><i class="fa fa-bar-chart"></i> MIN: {{ data.rsvp_min }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-80 col-offset-10">
+        <div class="card text-center">
+          <div class="item item-divider">
+            <i class="icon ion-star"></i> Check-in
+          </div>
+          <div class="item item-text-wrap">
+            <p><i class="fa fa-arrow-up"></i> MAX: {{ data.checkin_max }}</p>
+            <p><i class="fa fa-percent"></i> AVERAGE: {{ data.checkin_avg.toFixed(2) }}</p>
+            <p><i class="fa fa-bar-chart"></i> MIN: {{ data.checkin_min }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels">
+    </canvas> -->
+
+  </ion-content>
+
+</ion-view>
