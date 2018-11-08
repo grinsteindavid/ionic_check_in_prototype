@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MainCtrl', function MainCtrl($scope, $ionicModal, $http, $localStorage, $cordovaOauth, $ionicHistory, $ionicLoading, $ionicPopup, AuthService) {
+.controller('MainCtrl', function MainCtrl($scope, $state, $ionicModal, $http, $localStorage, $cordovaOauth, $ionicHistory, $ionicLoading, $ionicPopup, AuthService) {
   console.log('MainCtrl');
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -29,6 +29,7 @@ angular.module('starter.controllers', [])
   };**/
   $scope.user = {};
   $scope.loginModal = {};
+  $scope.auth = false;
 
   $ionicHistory.clearHistory();
 
@@ -45,19 +46,23 @@ angular.module('starter.controllers', [])
       AuthService.header('token', $localStorage.settings.token);
       $scope.loginModal.show();
       $ionicLoading.show();
-
+      console.log('token', $localStorage.settings.token);
+      
       $http.get(AuthService.api + '/validateLogin').then(function(response) {
-        console.log('AuthService login response ->', response);
+        console.log('AuthService validateLogin response ->', response);
+
         AuthService.header('X-Authorization', response.data.contact.client.api_key);
         AuthService.header('token', response.data.contact.app_token);
         $scope.user = response.data;
         $ionicLoading.hide();
         $scope.loginModal.hide();
+        $scope.auth = true;
         $scope.$broadcast('login', { dateTime: moment().format('MMMM Do YYYY, h:mm:ss a')});
       }, function(response) {
         console.log('AuthService login response ->', response);
+        AuthService.reset();
         $ionicLoading.hide();
-        $scope.showAlert('Alert', 'An error has occurred, try again.');
+        $scope.showAlert('Alert', response.data);
       });
 
     } else {
@@ -78,27 +83,29 @@ angular.module('starter.controllers', [])
       password: $scope.user.password
     }).then(function (response) {
       console.log('AuthService login response ->', response);
+
       $localStorage.settings.token = response.data.contact.app_token;
       AuthService.header('X-Authorization', response.data.contact.client.api_key);
       AuthService.header('token', response.data.contact.app_token);
       $scope.user = response.data;
       $ionicLoading.hide();
       $scope.loginModal.hide();
+      $scope.auth = true;
       $scope.$broadcast('login', { dateTime: moment().format('MMMM Do YYYY, h:mm:ss a') });
     }, function (response) {
       console.log('AuthService login response ->', response);
       $ionicLoading.hide();
-      $scope.showAlert('Alert', 'An error has occurred, try again.');
+      $scope.showAlert('Alert', response.data);
     });
   };
 
   $scope.logOut = function() {
-    $localStorage.$reset({
-      settings: {}
-    });
+    $scope.auth = false;
+    AuthService.reset();
 
     $scope.user = {};
     $scope.loginModal.show();
+    $state.go('app.dashboard');
   };
 
   $scope.showAlert = function(title, message) {
@@ -121,7 +128,9 @@ angular.module('starter.controllers', [])
 
   $scope.$on('$ionicView.enter', function (event) {
     console.log('$ionicView.enter');
-    getDashboardData();
+    if ($scope.auth) {
+      getDashboardData();
+    }
   });
 
   $scope.doRefresh = function () {
@@ -142,7 +151,9 @@ angular.module('starter.controllers', [])
     }, function (response) {
       console.log('DashboardData response ->', response);
       $ionicLoading.hide();
-      $scope.showAlert('Alert', 'An error has occurred, try again.');
+      if ($scope.auth) {
+        $scope.showAlert('Alert', response.data);
+      }
     });
   }
 })
@@ -235,7 +246,9 @@ angular.module('starter.controllers', [])
 
   $scope.$on('$ionicView.enter', function(event) {
     console.log('$ionicView.enter');
-    $scope.getEvent();
+    if ($scope.auth) {
+      $scope.getEvent();
+    }    
   });
 
   $scope.doRefreshEvent = function () {
@@ -359,7 +372,9 @@ angular.module('starter.controllers', [])
 
   $scope.$on('$ionicView.enter', function (event) {
     console.log('$ionicView.enter');
-    getUpcomingEvents();
+    if ($scope.auth) {
+      getUpcomingEvents();
+    }
   });
 
   $scope.doRefresh = function() {

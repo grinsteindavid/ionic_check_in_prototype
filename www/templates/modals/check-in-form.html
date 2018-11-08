@@ -36,9 +36,9 @@
         <div class="row">
             <div class="col-80 col-offset-10">
                 <div class="item range">
-                    <i class="icon ion-minus-circled" ng-click="guestMinus('female')"></i>
-                    <input type="range" ng-model="rsvp.female" min="0" ng-value="rsvp.female" max="{{ event.max_rsvp }}" ng-change="updateGuests()">
-                    <i class="icon ion-plus-circled" ng-click="guestPlus('female')"></i>
+                    <i class="icon ion-minus-circled" ng-click="guestMinus('female')" style="font-size: 35px;"></i>
+                    <input type="range" ng-model="rsvp.female" min="0" ng-value="rsvp.female" max="{{ event.max_rsvp }}" ng-change="updateGuests()" style="margin-right: 20px; margin-left: 20px;">
+                    <i class="icon ion-plus-circled" ng-click="guestPlus('female')" style="font-size: 35px;"></i>
                 </div>
             </div>
         </div>
@@ -57,9 +57,9 @@
         <div class="row" style="margin-bottom: 40px;">
             <div class="col-80 col-offset-10">
                 <div class="item range">
-                    <i class="icon ion-minus-circled" ng-click="guestMinus('male')"></i>
-                    <input type="range" ng-model="rsvp.male" min="0" ng-value="rsvp.male" max="{{ event.max_rsvp }}" ng-change="updateGuests()">
-                    <i class="icon ion-plus-circled" ng-click="guestPlus('male')"></i>
+                    <i class="icon ion-minus-circled" ng-click="guestMinus('male')" style="font-size: 35px;"></i>
+                    <input type="range" ng-model="rsvp.male" min="0" ng-value="rsvp.male" max="{{ event.max_rsvp }}" ng-change="updateGuests()" style="margin-right: 20px; margin-left: 20px;">
+                    <i class="icon ion-plus-circled" ng-click="guestPlus('male')" style="font-size: 35px;"></i>
                 </div>
             </div>
         </div>

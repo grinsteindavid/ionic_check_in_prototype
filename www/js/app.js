@@ -32,6 +32,10 @@ angular.module('starter', [
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $ionicPlatform.registerBackButtonAction(function (event) {
+      event.preventDefault();
+    }, 1000);
   });
 })
 
